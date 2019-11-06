@@ -17,12 +17,12 @@ sns.set_style("darkgrid")
 # Set display options for dataframes
 #pd.set_option('display.max_rows', 100)
 #pd.set_option('display.width', 500)
-pd.set_option('display.max_columns', 50)
+pd.set_option('display.max_columns', 10)
 
 
 # setup input directory and filename
 data = 'ripa_stops_datasd_v1'
-input_dir = r'C:\Users\TomBrody\Desktop\Projects\police-violence'
+input_dir = r'C:\Users\TomBrody\Desktop\Projects\sd-police'
 ticker_file = os.path.join(input_dir, data + '.csv')
 
 # read csv file into dataframe
@@ -51,7 +51,49 @@ print('The total length of the dataframe is', police_df.shape[0], 'rows',
 # 4. Transgender woman/girl, 5. Gender nonconforming 
 
 # gend_nc - blank = no, 5 = yes
-columns = [5, 12, 18, 19, 22]
 
-police_df = police_df.iloc[:, columns].replace(0, value='no', inplace=True)
 
+
+# super slow
+#columns = [5, 12, 18, 19, 22]
+#for col in columns:
+#    for i in range(1, len(police_df)):
+#        if police_df.iloc[i, col] == 0:
+#            police_df.iloc[i, col] = 'no'
+#        else:
+#            police_df.iloc[i, col] = 'yes'
+
+# !!!TODO!!!!
+# section is super inefficient, needs rework
+# stop_in_response_to_cfs
+police_df.iloc[:, 5].replace(0, value='no', inplace=True)
+police_df.iloc[:, 5].replace(1, value='yes', inplace=True)
+
+# highway_exit
+police_df.iloc[:, 12].replace(0, value='no', inplace=True)
+police_df.iloc[:, 12].replace(1, value='yes', inplace=True)
+
+# isstudent
+police_df.iloc[:, 18].replace(0, value='no', inplace=True)
+police_df.iloc[:, 18].replace(1, value='yes', inplace=True)
+
+# perceived_limited_english
+police_df.iloc[:, 19].replace(0, value='no', inplace=True)
+police_df.iloc[:, 19].replace(1, value='yes', inplace=True)
+
+# gender_nonconforming
+police_df.iloc[:, 22].replace(0, value='no', inplace=True)
+police_df.iloc[:, 22].replace(1, value='yes', inplace=True)
+
+# gend
+police_df.iloc[:, 23].replace(1, value='male', inplace=True)
+police_df.iloc[:, 23].replace(2, value='female', inplace=True)
+police_df.iloc[:, 23].replace(3, value='tmale', inplace=True)
+police_df.iloc[:, 23].replace(4, value='tfemale', inplace=True)
+police_df.iloc[:, 23].replace(5, value='nonconforming', inplace=True)
+
+# gend_nc
+police_df.iloc[:, 24].replace(np.nan, value='no', inplace=True)
+police_df.iloc[:, 24].replace(5, value='yes', inplace=True)
+       
+police_df.iloc[:, 23]
