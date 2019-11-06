@@ -65,6 +65,7 @@ print('The total length of the dataframe is', police_df.shape[0], 'rows',
 
 # !!!TODO!!!!
 # section is super inefficient, needs rework
+
 # stop_in_response_to_cfs
 police_df.iloc[:, 5].replace(0, value='no', inplace=True)
 police_df.iloc[:, 5].replace(1, value='yes', inplace=True)
@@ -95,5 +96,6 @@ police_df.iloc[:, 23].replace(5, value='nonconforming', inplace=True)
 # gend_nc
 police_df.iloc[:, 24].replace(np.nan, value='no', inplace=True)
 police_df.iloc[:, 24].replace(5, value='yes', inplace=True)
-       
-police_df.iloc[:, 23]
+      
+# output single column all rows
+# police_df.iloc[:, 23]
